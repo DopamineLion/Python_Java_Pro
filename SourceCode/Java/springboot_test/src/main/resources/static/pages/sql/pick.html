@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- 页面meta -->
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>demo</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <!-- 引入样式 -->
+
+    <link rel="stylesheet" href="../../plugins/elementui/index.css">
+
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="app-container">
+        <el-menu class="el-menu-demo" mode="horizontal" onclick="window.location='../../home.html'">
+            <el-menu-item index="1" >首页</el-menu-item>
+        </el-menu>
+        <div class="content-header">
+            <el-tabs type="border-card">
+                <el-tab-pane label="Business-SQL拣货签">
+                </el-tab-pane>
+                <div>
+                    波次号（必填）
+                    <el-input v-model="dialogForm.wave" placeholder="请输入内容" style="width: 150px;" class="filter-item"></el-input>
+                    分页第几页（必填）
+                    <el-input v-model="dialogForm.page" placeholder="请输入内容" type="number" style="width: 150px;" class="filter-item"></el-input>
+                    <span slot="footer" class="dialog-footer">
+                        是否汇总
+                        <el-select v-model="dialogForm.isSum" placeholder="请选择">
+                            <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+<!--                    <el-input v-model="dialogForm.wave" placeholder="请输入内容" style="width: 150px;" class="filter-item"></el-input>-->
+                    </span>
+                </div>
+            </el-tabs>
+            <el-card class="box-card" style="margin-top: 10px">
+                <div slot="header" class="clearfix">
+                    <span>SQL语句</span>
+                    <el-button type="primary" style="margin-top: 30px" style="float: right; padding: 3px 0" class="el-button--warning" @click="handleSubmit" >查询SQL语句</el-button>
+                </div>
+                <!--                <div v-for="o in 4" :key="o" class="text item">-->
+                <!--                    {{'列表内容 ' + o }}-->
+                <!--                </div>-->
+                <div class="text item">
+                    {{ sqlCache }}
+                </div>
+            </el-card>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- 引入组件库 -->
+
+<script src="../../js/vue.js"></script>
+
+<script src="../../plugins/elementui/index.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+
+<script src="../../js/axios.min.js"></script>
+
+<script src="../../js/utils.js"></script>
+
+<script>
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            sqlCache: '',
+            dialogForm:{
+                page: 1,
+            },
+            options: [{
+                value: '不汇总',
+                label: '不汇总'
+            }, {
+                value: '汇总',
+                label: '汇总'
+            }],
+            value: '不汇总'
+        },
+
+
+        methods: {
+            handleSubmit() {
+                if(this.dialogForm.isSum===undefined || this.dialogForm.isSum===""){
+                    this.$alert('是否汇总为必选项', '提示', {
+                        confirmButtonText: '确定',
+                    });
+                    return
+                }
+                if(this.dialogForm.wave === undefined || this.dialogForm.wave === '' ){
+                    this.$alert('波次号为必填项', '提示', {
+                        confirmButtonText: '确定',
+                    });
+                    return
+                }
+                console.log(this.dialogForm.isSum)
+                let sql
+                if(this.dialogForm.isSum == '不汇总'){
+                    sql = this.getSql1(this.dialogForm.wave, this.dialogForm.page)
+                }else{
+                    sql = this.getSql(this.dialogForm.wave, this.dialogForm.page)
+                }
+                sqlCache = ''
+                this.sqlCache = sql
+            },
+            getSql(wave, page){
+                page = page-1
+                let start = 0+(100*page)
+                let end = 100+(100*page)
+                let pageEnd = " w where rownum<=" + end + ") x where rn>" + start
+                let sql =
+                    "select x.* from \n" +
+                    "(select w.*, rownum rn from \n" +
+                    "\t(select waveno 波次号, USERDEFINE5 仓订单号, sku 项目号, LOCATION 库位, Descr_E 品名, LotAtt04 批号, sum(QTY_EACH) 数量 from \n" +
+                    "\t\t(select act.picktotraceid, act.waveno, ord.CONSIGNEEID, ord.CONSIGNEENAME, ord.USERDEFINE5\n" +
+                    "\t\t\t\t\t\t\t, act.sku, act.LOCATION, act.QTY_EACH, act.qty, sku.Descr_C, sku.alternate_sku1, sku.Descr_E\n" +
+                    "\t\t\t\t\t\t\t, lot.LotAtt04, act.LOTNUM, act.dropid, act.udf6, ROWNUM rn \n" +
+                    "\t\t\t\t\t\tfrom ACT_Allocation_Details act \n" +
+                    "\t\t\t\t\t\tleft outer join DOC_Order_Header ord on ord.orderno=act.orderno \n" +
+                    "\t\t\t\t\t\tleft outer join INV_LOT_ATT lot ON lot.LOTNUM = act.LOTNUM \n" +
+                    "\t\t\t\t\t\tleft outer join BAS_SKU sku ON sku.sku = act.sku and sku.customerid = act.customerid \n" +
+                    "\t\t\t\t\t\twhere act.waveno in ('WAVE241223059') \n" +
+                    "\t\t\t\t\t\t\t\t\tand (act.location in('28','29','7','BPZ_WH01') or act.location like'LZ%') \n" +
+                    "\t\t) group by waveno, USERDEFINE5, sku, LOCATION, Descr_E, LotAtt04\n" +
+                    "\t)" + pageEnd
+                return sql
+            }
+            ,
+            getSql1(wave, page) {
+                page = page-1
+                let start = 100*(0+page)
+                let end = 100*(1+page)
+                let pageStart =
+                    "select " +
+                    "picktotraceid,\n" +
+                    "waveno,\n" +
+                    "CONSIGNEEID,\n" +
+                    "CONSIGNEENAME,\n" +
+                    "USERDEFINE5,\n" +
+                    "sku,\n" +
+                    "LOCATION,\n" +
+                    "QTY_EACH,\n" +
+                    "qty,\n" +
+                    "Descr_C,\n" +
+                    "alternate_sku1,\n" +
+                    "Descr_E,\n" +
+                    "LotAtt04,\n" +
+                    "LOTNUM,\n" +
+                    "dropid,\n" +
+                    "rn \n" +
+                    " from ("
+                let pageEnd = " and rownum<=" + end + ") where rn>" + start
+                let condition = "where act.waveno='"+wave+"' and (act.location in('28','29','7','BPZ_WH01') or act.location like'LZ%')"
+                let sql =
+                    "select " +
+                    "act.picktotraceid,\n" +
+                    "act.waveno,\n" +
+                    "ord.CONSIGNEEID,\n" +
+                    "ord.CONSIGNEENAME,\n" +
+                    "ord.USERDEFINE5,\n" +
+                    "act.sku,\n" +
+                    "act.LOCATION,\n" +
+                    "act.QTY_EACH,\n" +
+                    "act.qty,\n" +
+                    "sku.Descr_C,\n" +
+                    "sku.alternate_sku1,\n" +
+                    "sku.Descr_E,\n" +
+                    "lot.LotAtt04,\n" +
+                    "act.LOTNUM,\n" +
+                    "act.dropid,\n" +
+                    "act.udf6,\n" +
+                    "ROWNUM rn \n" +
+                    "from ACT_Allocation_Details act \n" +
+                    "left outer join DOC_Order_Header ord  on ord.orderno=act.orderno\n" +
+                    "left outer join INV_LOT_ATT lot  ON lot.LOTNUM = act.LOTNUM  \n" +
+                    "left outer join BAS_SKU sku  ON sku.sku = act.sku and sku.customerid = act.customerid \n" +
+                    condition
+                sql = pageStart + sql + pageEnd
+                return sql
+            },
+        }
+    })
+</script>
+</html>

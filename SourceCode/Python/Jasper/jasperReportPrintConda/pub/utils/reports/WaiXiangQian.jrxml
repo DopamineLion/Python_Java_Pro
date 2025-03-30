@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Document_PACK_CARTON_WL_装箱标签" pageWidth="283" pageHeight="283" columnWidth="283" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<field name="FIELDVALUE1" class="java.lang.String"/>
+	<field name="FIELDVALUE2" class="java.lang.String"/>
+	<field name="FIELDVALUE3" class="java.lang.String"/>
+	<field name="FIELDVALUE4" class="java.lang.String"/>
+	<field name="FIELDVALUE5" class="java.lang.String"/>
+	<field name="FIELDVALUE6" class="java.lang.String"/>
+	<field name="FIELDVALUE7" class="java.lang.String"/>
+	<field name="FIELDVALUE8" class="java.lang.String"/>
+	<field name="FIELDVALUE9" class="java.lang.String"/>
+	<field name="FIELDVALUE10" class="java.lang.String"/>
+	<field name="FIELDVALUE11" class="java.lang.String"/>
+	<field name="FIELDVALUE12" class="java.lang.String"/>
+	<field name="FIELDVALUE13" class="java.lang.String"/>
+	<field name="FIELDVALUE14" class="java.lang.String"/>
+	<field name="FIELDVALUE15" class="java.lang.String"/>
+	<field name="FIELDVALUE16" class="java.lang.String"/>
+	<field name="FIELDVALUE17" class="java.lang.String"/>
+	<field name="FIELDVALUE18" class="java.lang.String"/>
+	<field name="FIELDVALUE19" class="java.lang.String"/>
+	<field name="FIELDVALUE20" class="java.lang.String"/>
+	<field name="FIELDVALUE21" class="java.lang.String"/>
+	<field name="FIELDVALUE22" class="java.lang.String"/>
+	<field name="FIELDVALUE23" class="java.lang.String"/>
+	<field name="FIELDVALUE24" class="java.lang.String"/>
+	<field name="FIELDVALUE25" class="java.lang.String"/>
+	<field name="FIELDVALUE26" class="java.lang.String"/>
+	<field name="FIELDVALUE27" class="java.lang.String"/>
+	<field name="FIELDVALUE28" class="java.lang.String"/>
+	<field name="FIELDVALUE29" class="java.lang.String"/>
+	<field name="FIELDVALUE30" class="java.lang.String"/>
+	<field name="FIELDVALUE31" class="java.lang.String"/>
+	<field name="FIELDVALUE32" class="java.lang.String"/>
+	<field name="FIELDVALUE33" class="java.lang.String"/>
+	<field name="FIELDVALUE34" class="java.lang.String"/>
+	<field name="FIELDVALUE35" class="java.lang.String"/>
+	<field name="FIELDVALUE36" class="java.lang.String"/>
+	<field name="FIELDVALUE37" class="java.lang.String"/>
+	<field name="FIELDVALUE38" class="java.lang.String"/>
+	<field name="FIELDVALUE39" class="java.lang.String"/>
+	<field name="FIELDVALUE40" class="java.lang.String"/>
+	<field name="FIELDVALUE41" class="java.lang.String"/>
+	<field name="FIELDVALUE42" class="java.lang.String"/>
+	<field name="FIELDVALUE43" class="java.lang.String"/>
+	<field name="FIELDVALUE44" class="java.lang.String"/>
+	<field name="FIELDVALUE45" class="java.lang.String"/>
+	<field name="FIELDVALUE46" class="java.lang.String"/>
+	<field name="FIELDVALUE47" class="java.lang.String"/>
+	<field name="FIELDVALUE48" class="java.lang.String"/>
+	<field name="FIELDVALUE49" class="java.lang.String"/>
+	<field name="FIELDVALUE50" class="java.lang.String"/>
+	<field name="FIELDVALUE51" class="java.lang.String"/>
+	<field name="FIELDVALUE52" class="java.lang.String"/>
+	<field name="FIELDVALUE53" class="java.lang.String"/>
+	<field name="FIELDVALUE54" class="java.lang.String"/>
+	<field name="FIELDVALUE55" class="java.lang.String"/>
+	<field name="FIELDVALUE56" class="java.lang.String"/>
+	<field name="FIELDVALUE57" class="java.lang.String"/>
+	<field name="FIELDVALUE58" class="java.lang.String"/>
+	<field name="FIELDVALUE59" class="java.lang.String"/>
+	<field name="FIELDVALUE60" class="java.lang.String"/>
+	<field name="FIELDVALUE61" class="java.lang.String"/>
+	<field name="FIELDVALUE62" class="java.lang.String"/>
+	<field name="FIELDVALUE63" class="java.lang.String"/>
+	<field name="FIELDVALUE64" class="java.lang.String"/>
+	<field name="FIELDVALUE65" class="java.lang.String"/>
+	<group name="FIELDVALUE46" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FIELDVALUE1}]]></groupExpression>
+		<groupHeader>
+			<band splitType="Stretch"/>
+		</groupHeader>
+		<groupFooter>
+			<band splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="283" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-56" x="70" y="70" width="206" height="32"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE62}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-70" x="15" y="70" width="52" height="32"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[收货人:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-79" x="15" y="42" width="52" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[发货至:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="68" y="42" width="75" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE50}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-80" x="15" y="105" width="52" height="23"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[品名:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-66" x="59" y="243" width="98" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE56}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-198" x="167" y="243" width="55" height="17"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="simhei" size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[波次号:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-199" x="208" y="243" width="98" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE65}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-81" x="12" y="243" width="55" height="17"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="simhei" size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[打印时间:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-79" x="15" y="10" width="52" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[订单号:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="69" y="10" width="206" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="15" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE61}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-79" x="144" y="42" width="54" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[项目号:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="198" y="42" width="77" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE6}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-56" x="70" y="105" width="103" height="23"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE35}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="69" y="137" width="75" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE11}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-79" x="145" y="136" width="54" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[数量:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="204" y="137" width="31" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE13}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-79" x="15" y="137" width="52" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[单位:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="199" y="169" width="77" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE16}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="69" y="169" width="75" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE19}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-79" x="15" y="169" width="52" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[批号:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-79" x="145" y="169" width="54" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[生产日期:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="198" y="198" width="77" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE59}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-64" x="68" y="198" width="75" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE58}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-79" x="144" y="198" width="54" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[标签号:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-79" x="15" y="198" width="52" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[库位:]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="13" y="9" width="1" height="218"/>
+			</line>
+			<line>
+				<reportElement key="line" x="68" y="9" width="1" height="218"/>
+			</line>
+			<line>
+				<reportElement key="line" x="274" y="9" width="1" height="218"/>
+			</line>
+			<line>
+				<reportElement key="line" x="13" y="9" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="14" y="227" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="13" y="38" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="13" y="68" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="13" y="101" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="13" y="131" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="13" y="166" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="13" y="195" width="261" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="199" y="131" width="1" height="96"/>
+			</line>
+			<line>
+				<reportElement key="line" x="143" y="131" width="1" height="96"/>
+			</line>
+			<line>
+				<reportElement key="line" x="143" y="38" width="1" height="30"/>
+			</line>
+			<line>
+				<reportElement key="line" x="198" y="38" width="1" height="30"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-86" x="235" y="137" width="30" height="25"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[/箱]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-70" x="173" y="105" width="96" height="23"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="simhei" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE21}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-71" x="173" y="235" width="51" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="14" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE60}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-72" x="224" y="235" width="52" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="simhei" size="14" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FIELDVALUE64}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

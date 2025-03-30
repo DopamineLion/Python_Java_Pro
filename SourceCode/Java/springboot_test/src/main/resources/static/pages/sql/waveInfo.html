@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- 页面meta -->
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>demo</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <!-- 引入样式 -->
+
+    <link rel="stylesheet" href="../../plugins/elementui/index.css">
+
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="app-container">
+        <el-menu class="el-menu-demo" mode="horizontal" onclick="window.location='../../home.html'">
+            <el-menu-item index="1" >首页</el-menu-item>
+        </el-menu>
+        <div class="content-header">
+            <el-tabs type="border-card">
+                <el-tab-pane label="Business-SQL查询波次信息">
+                </el-tab-pane>
+                <div>
+                    波次号（必填）
+                    <el-input v-model="dialogForm.wave" placeholder="请输入内容" style="width: 150px;" class="filter-item"></el-input>
+                    分页第几页（必填）
+                    <el-input v-model="dialogForm.page" placeholder="请输入内容" type="number" style="width: 150px;" class="filter-item"></el-input>
+                    <span slot="footer" class="dialog-footer">
+                </span>
+                </div>
+            </el-tabs>
+            <el-card class="box-card" style="margin-top: 10px">
+                <div slot="header" class="clearfix">
+                    <span>SQL语句</span>
+                    <el-button type="primary" style="margin-top: 30px" style="float: right; padding: 3px 0" class="el-button--warning" @click="handleSubmit" >查询SQL语句</el-button>
+                </div>
+<!--                <div v-for="o in 4" :key="o" class="text item">-->
+<!--                    {{'列表内容 ' + o }}-->
+<!--                </div>-->
+                <div class="text item">
+                    {{ sqlCache }}
+                </div>
+            </el-card>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- 引入组件库 -->
+
+<script src="../../js/vue.js"></script>
+
+<script src="../../plugins/elementui/index.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+
+<script src="../../js/axios.min.js"></script>
+
+<script src="../../js/utils.js"></script>
+
+<script>
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            sqlCache: '',
+            dialogForm:{
+                page: 1,
+                location: 'BPZ_WH01'
+            }
+        },
+
+
+        methods: {
+            handleSubmit() {
+                if(this.dialogForm.wave === undefined || this.dialogForm.wave === ''){
+                    this.$alert('波次号为必填项', '提示', {
+                        confirmButtonText: '确定',
+                    });
+                    return
+                }
+                let sql = this.getSql(this.dialogForm.wave, this.dialogForm.location, this.dialogForm.page)
+                this.sqlCache = sql
+            },
+            getSql(wave, location, page) {
+                page = page-1
+                let start = 0+(100*page)
+                let end = 100+(100*page)
+                let pageEnd = " where rownum<=" + end + ") w where rn>" + start
+
+                let sql =
+                    "select w.* from \n" +
+                    "\t\t(select sku69,SKU号,生产日期,失效日期,'' 名称,数量,rownum rn \n" +
+                    "\t\t\t\tfrom (select sku69,SKU号,生产日期,失效日期,sum(数量) 数量 \n" +
+                    "\t\t\t\t\t\tfrom (select distinct s.sku_group9 sku69,d.sku SKU号,d.lotatt01 生产日期,d.lotatt02 失效日期,d.QTYORDERED 数量 \n" +
+                    "\t\t\t\t\t\t\t\t,t.SOREFERENCE5,d.d_edi_01,d.orderno,d.lotatt04 ,d.GROSSWEIGHT,d.CUBIC,d.PRICE,d.packID,d.location \n" +
+                    "\t\t\t\t\t\t\t\tfrom DOC_ORDER_DETAILS d \n" +
+                    "\t\t\t\t\t\t\t\tleft join DOC_Order_Header t on d.orderno=t.orderno \n" +
+                    "\t\t\t\t\t\t\t\tleft join WL_JD_HZCK hz on hz.FIELD02=d.sku \n" +
+                    "\t\t\t\t\t\t\t\tleft join BAS_SKU s on s.sku=d.sku \n" +
+                    "\t\t\t\t\t\t\t\twhere t.waveno in ('"+wave+"') \n" +
+                    "\t\t\t\t\t\t\t\tand d.location='BPZ_WH01' and d.d_edi_01 not like '%北京%' \n" +
+                    "\t\t\t\t\t\t\t\t) group by sku69,SKU号,生产日期,失效日期\n" +
+                    "\t\t\t\t\t\t\t) \n" + pageEnd
+                return sql
+            },
+            getSql2(wave, location, page) {
+                page = page-1
+                let start = 100 * page
+                let end = 100+(100*page)
+                let pageStart = "select " +
+                    "SKU号," +
+                    "名称," +
+                    "生产日期," +
+                    "失效日期," +
+                    "数量" +
+                    " from "
+                let condition = " where t.waveno='"+wave + "'"
+                if(location !== undefined && location !== ''){
+                    condition = condition + " and d.location='" + location + "'"
+                }
+
+                let sql =
+                    pageStart +
+                    "(select SKU号,生产日期,失效日期,名称,数量,rownum rn \n" +
+                    " from \n" +
+                    "(select distinct d.sku SKU号,d.lotatt01 生产日期,d.lotatt02 失效日期 \n" +
+                    ",s.DESCR_C||' '||s.ALTERNATE_SKU1 名称,d.QTYORDERED 数量 \n" +
+                    ",t.SOREFERENCE5,d.d_edi_01,d.orderno,d.lotatt04\n" +
+                    ",d.GROSSWEIGHT,d.CUBIC,d.PRICE,d.packID,d.location \n" +
+                    " from DOC_ORDER_DETAILS d \n" +
+                    " left join DOC_Order_Header t on d.orderno=t.orderno\n" +
+                    " left join WL_JD_HZCK hz on hz.FIELD02=d.sku\n" +
+                    " left join BAS_SKU s on s.sku=d.sku" +
+                    condition +
+                    ") \n" +
+                    " where rownum<=" +
+                    end +
+                    ")\n" +
+                    " where rn>" +
+                    start
+
+                return sql
+            },
+        }
+    })
+</script>
+</html>

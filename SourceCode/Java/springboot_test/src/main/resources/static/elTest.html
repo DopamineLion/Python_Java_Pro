@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <el-upload style="width:400px" class="upload-demo"
+               ref="upload"
+               :limit="1"
+               :multiple="true"
+               accept=".xlsx"
+               action
+               :on-change="handleChange"
+               :on-remove="handleUploadRemove"
+               :auto-upload="false">
+        <el-button slot="trigger" type="primary">选取Excel文件</el-button>
+        <div slot="tip" class="el-upload__tip">上传文件不超过20MB</div>
+    </el-upload>
+    <div style="margin-top: 30px">
+        Excel数据预览
+        <el-table :data="tableData" stripe border max-height="600">
+            <el-table-column v-for="header in headers"
+                             sortable :key="header"
+                             :prop="header"
+                             width="100%"
+                             :label="header" ></el-table-column>
+        </el-table>
+    </div>
+</div>
+
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./js/xlsx.full.min.js"></script>
+<script src="./plugins/elementui/index.js"></script>
+<link rel="stylesheet" href="./plugins/elementui/index.css"/>
+<script>
+    new Vue({
+        el: "#app",
+        data:{
+            tableData: [],
+            headers: [],
+        },
+        methods: {
+            handleChange(file, fileList) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, {type: 'array'});
+                    const firstSheetName = workbook.SheetNames[0];
+                    // const worksheet = workbook.Sheets['下单用'];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    // 处理json数据
+                    // const json = XLSX.utils.sheet_to_json(worksheet);
+                    // console.log(json);
+                    this.headers = XLSX.utils.sheet_to_json(worksheet, {header: 1})[0];
+                    this.tableData = XLSX.utils.sheet_to_json(worksheet).slice(1);
+                };
+                reader.readAsArrayBuffer(file.raw);
+            },
+            handleUploadRemove(file) {
+                this.headers = []
+                this.tableData = []
+            },
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- 页面meta -->
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>demo</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <!-- 引入样式 -->
+
+    <link rel="stylesheet" href="../../plugins/elementui/index.css">
+
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="app-container">
+        <el-menu class="el-menu-demo" mode="horizontal" onclick="window.location='../../home.html'">
+            <el-menu-item index="1" >首页</el-menu-item>
+        </el-menu>
+        <div class="content-header">
+            <el-tabs type="border-card">
+                <el-tab-pane label="Business-SQL区分一楼、三楼托盘号">
+                </el-tab-pane>
+                <div>
+                    波次号（必填）
+                    <el-input v-model="dialogForm.wave" placeholder="请输入内容" style="width: 150px;" class="filter-item"></el-input>
+                    <span slot="footer" class="dialog-footer">
+                </span>
+                </div>
+            </el-tabs>
+            <el-card class="box-card" style="margin-top: 10px">
+                <div slot="header" class="clearfix">
+                    <span>SQL语句</span>
+                    <el-button type="primary" style="margin-top: 30px" style="float: right; padding: 3px 0" class="el-button--warning" @click="handleSubmit" >查询SQL语句</el-button>
+                </div>
+                <!--                <div v-for="o in 4" :key="o" class="text item">-->
+                <!--                    {{'列表内容 ' + o }}-->
+                <!--                </div>-->
+                <div class="text item">
+                    {{ sqlCache }}
+                </div>
+            </el-card>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- 引入组件库 -->
+
+<script src="../../js/vue.js"></script>
+
+<script src="../../plugins/elementui/index.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+
+<script src="../../js/axios.min.js"></script>
+
+<script src="../../js/utils.js"></script>
+
+<script>
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            sqlCache: '',
+            dialogForm:{
+                page: 1,
+            }
+        },
+
+
+        methods: {
+            handleSubmit() {
+                if(this.dialogForm.wave === undefined || this.dialogForm.wave === ''){
+                    this.$alert('波次号为必填项', '提示', {
+                        confirmButtonText: '确定',
+                    });
+                    return
+                }
+                let sql = this.getSql(this.dialogForm.wave, this.dialogForm.page)
+                this.sqlCache = sql
+            },
+            getSql(wave, page) {
+                let condition = " and act.waveno='"+wave+"'"
+                let sql =
+                    "select \n" +
+                    "LISTAGG(tsk.FMID, ''',''') WITHIN GROUP (ORDER BY tsk.FMID) AS concatenated_string \n" +
+                    "from ACT_Allocation_Details act \n" +
+                    "left join TSK_TaskLists tsk on act.ALLOCATIONDETAILSID=tsk.ALLOCATIONDETAILSID\n" +
+                    "where tsk.WCSFLAG='Y' and tsk.grouptasksequence='0'"
+                sql = sql + condition
+                return sql
+            },
+            getSql1(wave, page) {
+                page = page-1
+                let start = 100*(0+page)
+                let end = 100*(1+page)
+                let pageStart = "select concatenated_string,rn from ("
+                let pageEnd = " and rownum<=" + end + ") where rn>" + start
+                let condition = " and act.waveno='"+wave+"'"
+                let sql =
+                    "select \n" +
+                    "LISTAGG(tsk.FMID, ''',''') WITHIN GROUP (ORDER BY tsk.FMID) AS concatenated_string" +
+                    ",rownum rn \n" +
+                    "from ACT_Allocation_Details act \n" +
+                    "left join TSK_TaskLists tsk on act.ALLOCATIONDETAILSID=tsk.ALLOCATIONDETAILSID\n" +
+                    "where tsk.WCSFLAG='Y' and tsk.grouptasksequence='0'"
+                sql = sql + condition
+                sql = pageStart + sql + pageEnd
+                return sql
+            },
+        }
+    })
+</script>
+</html>

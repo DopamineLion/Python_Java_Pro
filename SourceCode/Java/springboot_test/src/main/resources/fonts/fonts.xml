@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+    <fontFamily name="黑体">
+        <normal>fonts/simhei.ttf</normal>
+        <bold>fonts/simhei.ttf</bold>
+        <italic>fonts/simhei.ttf</italic>
+        <boldItalic>fonts/simhei.ttf</boldItalic>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded>
+        <exportFonts>
+            <export key="net.sf.jasperreports.html">'黑体', Arial, Helvetica, sans-serif</export>
+            <export key="net.sf.jasperreports.xhtml">'黑体', Arial, Helvetica, sans-serif</export>
+        </exportFonts>
+    </fontFamily>
+    <fontFamily name="宋体">
+        <normal>fonts/SimSun-01.ttf</normal>
+        <bold>fonts/SimSun-01.ttf</bold>
+        <italic>fonts/SimSun-01.ttf</italic>
+        <boldItalic>fonts/SimSun-01.ttf</boldItalic>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded>
+        <exportFonts>
+            <export key="net.sf.jasperreports.html">'宋体', Arial, Helvetica, sans-serif</export>
+            <export key="net.sf.jasperreports.xhtml">'宋体', Arial, Helvetica, sans-serif</export>
+        </exportFonts>
+    </fontFamily>
+</fontFamilies>

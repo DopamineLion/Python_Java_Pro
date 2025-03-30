@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- 页面meta -->
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>demo</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <!-- 引入样式 -->
+
+    <link rel="stylesheet" href="../../plugins/elementui/index.css">
+
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="content-header">
+        <h1>Business</h1>
+    </div>
+    <div class="app-container">
+        <div class="box">
+            <div class="title">
+                <el-button @click="getAll()" class="dalfBut">查询</el-button>
+            </div>
+            <div class="filter-container">
+                <el-row>
+                    <el-col :span="8">
+                        <div class="grid-content bg-purple">
+                            组套需求Excel
+                            <el-upload
+                                    id="inputUpload1"
+                                    action="http://localhost:8080/business/upload"
+                                    :on-preview="handlePreview"
+                                    :on-remove="handleRemove"
+                                    :before-remove="beforeRemove"
+                                    accept=".xlsx"
+                                    :limit="1"
+                                    :on-exceed="handleExceed"
+                                    :on-change="handleChange"
+                                    :file-list="fileList"
+                                    :auto-upload="false"
+                                    style="width:400px">
+                                <el-button size="small" type="primary">点击上传</el-button>
+                                <div slot="tip" class="el-upload__tip">上传Excel文件(xlsx格式)</div>
+                                <el-button style="margin-left: 10px" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+                            </el-upload>
+                        </div>
+                    </el-col>
+                    <el-col :span="8">
+                        <div class="grid-content bg-purple">
+                            组套数量Column
+                            <el-input v-model="pagination.length" placeholder="请输入内容" style="width: 150px;"
+                                      class="filter-item"></el-input>
+                        </div>
+                    </el-col>
+                    <el-col :span="8">
+                        <div class="grid-content bg-purple-light">
+                            组套需求Column
+                            <el-input v-model="pagination.filter" placeholder="请输入内容" style="width: 150px;"
+                                      class="filter-item"></el-input>
+                        </div>
+                    </el-col>
+                </el-row>
+                <el-row style="margin-top: 20px">
+                    <el-col :span="24">
+                        <div class="grid-content bg-purple-dark">
+                            WMS导出的Excel
+                            <el-upload
+                                    action=""
+                                    :on-preview="handlePreview2"
+                                    :on-remove="handleRemove2"
+                                    :before-remove="beforeRemove2"
+                                    accept=".xlsx"
+                                    :limit="1"
+                                    :on-exceed="handleExceed2"
+                                    :on-change="handleChange2"
+                                    :file-list="fileList2"
+                                    :auto-upload="false"
+                                    style="width:400px">
+                                <el-button size="small" type="primary">点击上传</el-button>
+                                <div slot="tip" class="el-upload__tip">上传Excel文件(xlsx格式)</div>
+                            </el-upload>
+                        </div>
+                    </el-col>
+                </el-row>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- 引入组件库 -->
+
+<script src="../../js/vue.js"></script>
+
+<script src="../../plugins/elementui/index.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+
+<script src="../../js/axios.min.js"></script>
+
+<script>
+
+    var vue = new Vue({
+
+        el: '#app',
+        data: {
+            pagination: {},
+            fileList: [],
+            fileList2: [],
+            dataList: [],//当前页要展示的列表数据
+            dialogFormVisible: false,//控制表单是否可见
+            dialogFormVisible4Edit: false,//编辑表单是否可见
+            rules: {//校验规则
+                pagination: [{required: true, message: '图书类别为必填项', trigger: 'blur'}],
+            }
+        },
+
+        // 钩子函数，VUE对象初始化完成后自动执行
+        created() {
+            // this.getAll();
+        },
+
+        methods: {
+            //列表
+            getAll() {
+                this.pagination.excelPath = this.fileList[0].name
+                let copy = Object.assign({}, this.pagination);
+                copy.excelPath = this.fileList2[0].name
+                let map = new Map();
+                map.set("business",this.pagination)
+                map.set("business2",copy)
+                // 将Map对象转换为普通对象
+                const data = Object.fromEntries(map)
+                //发送ajax请求
+                axios.put("/business/standard", data).then((res) => {
+                    // this.dataList = res.data.data;
+                });
+            },
+
+            onSuccess(response, file, fileList) {
+                // data:
+                //   newName: "e669f501-d74b-49c1-be73-0d9f0f6fb5c1.jpg";
+                //   oldName: "88c751111ec1c00e1fd64b0ee41fd68f335b5fc2.jpg@404w_404h[1].jpg";
+                // msg: "上传成功";
+                // status: 200;
+                this.$message.success(response.msg);
+                this.$store.commit("setAvatar", response.data.newName);
+                this.avatarUrl =
+                    "http://localhost:8181/user/file/avatar/" + response.data.newName;
+                // console.log(file);
+                // console.log(fileList);
+            },
+            submitUpload() {
+                this.$nextTick(() => {
+                    this.uploadVisible = false;
+                    this.$refs.upload.submit();
+                });
+            },
+
+
+            // 文件上传
+            handleChange(file, fileList) {
+                if (fileList.length > 0) {
+                    this.fileList = [fileList[fileList.length - 1]]  // 这一步，是 展示最后一次选择的csv文件
+                }
+            },
+            handleRemove(file, fileList) {
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove(file, fileList) {
+                return this.$confirm(`确定移除 ${file.name}？`);
+            },
+
+            // 文件2上传
+            handleChange2(file, fileList) {
+                if (fileList.length > 0) {
+                    this.fileList2 = [fileList[fileList.length - 1]]  // 这一步，是 展示最后一次选择的csv文件
+                }
+            },
+            handleRemove2(file, fileList) {
+            },
+            handlePreview2(file) {
+                console.log(file);
+            },
+            handleExceed2(files, fileList) {
+                this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove2(file, fileList) {
+                return this.$confirm(`确定移除 ${file.name}？`);
+            },
+        }
+    })
+</script>
+</html>

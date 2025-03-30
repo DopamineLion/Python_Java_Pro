@@ -1,0 +1,1 @@
+配置文件夹stocktaking需放到D盘下

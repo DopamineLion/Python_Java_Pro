@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计</title>
+</head>
+<body>
+
+<div id="app">
+    <el-container style="height: 700px; border: 1px solid #eee">
+        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+            <el-menu :default-openeds="['1', '1']">
+                <el-submenu index="1">
+                    <template slot="title"><i class="el-icon-menu"></i>导航一</template>
+                        <el-menu-item index="1-1">统计组套</el-menu-item>
+                </el-submenu>
+            </el-menu>
+        </el-aside>
+
+        <el-container>
+            <el-header style="text-align: right; font-size: 12px">
+                <a onclick="window.location='./home.html'">首页</a>
+            </el-header>
+
+            <el-main>
+                <div>
+                    <div style="margin-top:10px">
+                        新增Excel
+                        <el-upload style="width:400px" class="upload-demo"
+                                   ref="upload"
+                                   :limit="100"
+                                   :multiple="true"
+                                   accept=".xlsx"
+                                   action
+                                   :on-remove="handleUploadRemove"
+                                   :on-change="handleUploadChange"
+                                   :on-exceed="handleUploadExceed"
+                                   :file-list="fileList"
+                                   :http-request="uploadFile"
+                                   :auto-upload="false">
+
+                            <el-button slot="trigger" type="primary">选取Excel文件</el-button>
+                            <div slot="tip" class="el-upload__tip">上传文件不超过20MB</div>
+                        </el-upload>
+                    </div>
+
+                    <span slot="footer" class="dialog-footer">
+                        <el-button style="margin-top: 30px" class="el-button--warning" type="primary" @click="handleSubmit" v-loading.fullscreen.lock="fullscreenLoading">提交</el-button>
+                    </span>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button style="margin-top: 30px" class="el-button--success" type="primary" @click="handleQueryAll">统计组套</el-button>
+                    </span>
+
+                    <span slot="footer" class="dialog-footer">
+                        上传类型
+                        <el-select v-model="dialogForm.type" placeholder="请选择">
+                            <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </span>
+                </div>
+                <div style="margin-top: 10px">
+                    Excel数据预览
+                </div>
+                <el-table
+                        stripe border
+                        :data="tableData"
+                        style="width: 100%">
+                    <el-table-column sortable prop="fileName" label="Excel文件名" width="220"></el-table-column>
+                    <el-table-column sortable prop="update" label="上传时间" width="220"></el-table-column>
+                    <el-table-column label="操作" width="220">
+
+                        <template slot-scope="scope">
+<!--                            <a href="http://localhost:8080/otherBusiness/downloadTotal?fileName=" >下载</a>-->
+                            <el-button @click="downloadExcel(scope.row)" type="text" size="small">下载</el-button>
+                            <el-button @click="deleteExcel(scope.row)" type="text" size="small">删除</el-button>
+                            <el-button @click="getListByFileName(scope.row)" type="text" size="small">查看</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+
+                <el-dialog title="Excel信息" width="90%" :visible.sync="dialogTableVisible">
+                    <el-table :data="gridData">
+                        <el-table-column v-for="(header, index) in gridDataHeaders"
+                                         sortable
+                                         width="100%"
+                                         :key="index"
+                                         :prop="header.prop"
+                                         :label="header.label">
+                        </el-table-column>
+
+
+<!--                        <div v-for="(item2, i) in gridData" :key="i" >-->
+<!--                            &lt;!&ndash; 动态表头渲染 &ndash;&gt;-->
+<!--                            <el-table-column :label="item2" min-width="250" align="center">-->
+<!--                            </el-table-column>-->
+<!--                        </div>-->
+                    </el-table>
+                </el-dialog>
+            </el-main>
+
+        </el-container>
+    </el-container>
+</div>
+
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./js/xlsx.full.min.js"></script>
+<script src="./plugins/elementui/index.js"></script>
+<script src="../../js/utils.js"></script>
+<link rel="stylesheet" href="./plugins/elementui/index.css"/>
+<script type="module">
+    new Vue({
+        el: "#app",
+        data: {
+            files: [],//新增文件
+            fileList: [],//文件列表
+            removeList: [],//删除的文件列表
+            tableData: [],// Excel文件列表
+            fullscreenLoading: false,
+
+            dialogTableVisible: false,
+            gridData:[],//查看Excel列表
+            gridDataHeaders: [],//标题行
+
+            dialogForm:{
+            },
+            options: [{
+                value: '京东',
+                label: '京东'
+            }, {
+                value: '海参',
+                label: '海参'
+            }],
+            value: '不汇总'
+        },
+        mounted() {
+            this.dataListRefresh();
+        },
+        methods: {
+            uploadFile(file) {
+                this.files.push(file.file);
+            },
+            handleUploadChange(file,fileList) {
+                // 当多余一个的时候替换文件
+                // if (fileList.length > 1) {
+                //   fileList.splice(0, 1);
+                // }
+                //获取上传文件大小
+                let imgSize = Number(file.size / 1024 / 1024);
+                if (imgSize > 20) {
+                    this.$message.warning("文件过大！")
+                }
+            },
+            handleUploadExceed(files, fileList) {
+                this.$message.warning(
+                    `当前限制选择 100 个文件，本次选择了 ${
+                        files.length
+                    } 个文件，共选择了 ${files.length + fileList.length} 个文件`
+                );
+            },
+            handleUploadRemove(file) {
+                this.files.pop(file)
+            },
+            handleSubmit() {
+                this.$refs.upload.submit();
+                if(this.files==null||this.files.length===0){
+                    alert("请至少选择一个文件")
+                    return
+                }
+                let formDate = new FormData();
+                this.files.forEach(element => {
+                    formDate.append("files", element);
+                });
+                let config = {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                };
+                this.fullscreenLoading = true;
+                //携带表单参数
+                // formDate.append("form", JSON.stringify(this.dialogForm));
+                axios.post("http://localhost:8080/total/addTotal", formDate, config).then(res => {
+                    alert(res.data)
+                    this.fullscreenLoading = false;
+                    this.dataListRefresh()
+                    this.files = []
+                })
+            },
+            dataListRefresh() {
+                axios.get("http://localhost:8080/total/total").then(res => {
+                    if(res!=null && res.data.code === 20041){
+                        this.tableData = res.data.data;
+                    }else{
+                        alert("查询失败！原因："+res.data.msg)
+                    }
+                    this.fullscreenLoading = false;
+                })
+            },
+            downloadExcel(row){
+                window.location.href = "http://localhost:8080/total/downloadTotal?fileName=" + row.fileName;
+            },
+            deleteExcel(row){
+                this.fullscreenLoading = true;
+                axios.delete("http://localhost:8080/total/deleteTotal", {params: {fileName:row.fileName}}).then(res => {
+                    if(res!=null && res.data.code === 20021){
+                        alert(res.data.msg)
+                    }else{
+                        alert("删除失败！原因："+res.data.msg)
+                    }
+                    this.fullscreenLoading = false;
+                    this.dataListRefresh();
+                })
+            },
+            getListByFileName(row){
+                this.gridDataHeaders=[]
+                this.gridData=[]
+                this.dialogTableVisible = true
+                axios.get("http://localhost:8080/total/getListByFileName", {params: {fileName:row.fileName}}).then(res => {
+                    if(res!=null && res.data.code === 20041){
+                        let tempGridData = res.data.data;
+                        for(let i=0;i<tempGridData[0].length;i++){
+                            let tempMap = {"label":tempGridData[0][i],"prop":tempGridData[0][i]}
+
+                            this.gridDataHeaders.push(tempMap)
+                        }
+                        let resultGridData = []
+                        for(let j=1;j<tempGridData.length;j++){
+                            let gridDataRow = {}
+                            for(let x=0;x<tempGridData[j].length;x++){
+                                let tempKey = tempGridData[0][x];
+                                gridDataRow[tempKey]=tempGridData[j][x]
+                            }
+                            resultGridData.push(gridDataRow)
+                        }
+                        this.gridData = resultGridData
+                    }else{
+                        alert("查询失败！原因："+res.data.msg)
+                    }
+                })
+            },
+            handleQueryAll(){
+                axios.get("http://localhost:8080/total/queryAllResult", {params: {'type':this.dialogForm.type}}).then(res => {
+                    if (res != null && res.data.code === 20041) {
+                        // let standardList = res.data.data.standardList;
+                        // let miniList = res.data.data.miniList;
+                        // let allList = res.data.data.allList;
+                        let sumStandard = res.data.data.sumStandard;
+                        let sumMini = res.data.data.sumMini;
+                        let base64 = res.data.data.base64;
+                        alert("大签组套总共"+sumStandard+"套，小签贴码总共"+sumMini+"套。")
+                        saveByteArray("统计结果.xlsx",base64ToArrayBuffer(base64))
+                    }
+                })
+            }
+        }
+    })
+</script>
+<style>
+    .el-header {
+        background-color: #B3C0D1;
+        color: #333;
+        line-height: 60px;
+    }
+
+    .el-aside {
+        color: #333;
+    }
+</style>
+</body>
+</html>

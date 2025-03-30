@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>demo</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="plugins/elementui/index.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="hold-transition">
+    <div id="app">
+        <div class="content-header">
+            <h1>Dopamine</h1>
+        </div>
+
+        <div class="app-container">
+            <div class="box">
+                <div>
+                    <el-tabs type="border-card">
+                        <el-tab-pane label="Business">
+                            <el-button onclick="window.location='./pages/business/standard.html'" class="el-button--medium">京东仓大签</el-button>
+                            <el-button onclick="window.location='./pages/business/mini.html'" class="el-button--medium">京东仓小签</el-button>
+                            <el-button onclick="window.location='./pages/business/all.html'" class="el-button--medium">京东仓全部</el-button>
+                            <el-button onclick="window.location='./pages/business/sea.html'" class="el-button--medium">海参</el-button>
+                        </el-tab-pane>
+                        <el-tab-pane label="Jasper">
+                            <el-button onclick="window.location='./pages/jasper/miniJasper.html'" class="el-button--medium">30*20小签</el-button>
+                            <el-button onclick="window.location='./pages/jasper/standardJasper.html'" class="el-button--medium">60*40大签</el-button>
+                            <el-button onclick="window.location='./pages/jasper/jianHuo.html'" class="el-button--medium">80*60拣货签</el-button>
+                            <el-button onclick="window.location='./pages/jasper/mcnJasper.html'" class="el-button--medium">100*100 MCN盘点签</el-button>
+                            <el-button onclick="window.location='./pages/jasper/mcnBoxJasper.html'" class="el-button--medium">100*100 MCN外箱签</el-button>
+                            <el-button onclick="window.location='./pages/jasper/budaqian.html'" class="el-button--medium">100*100 补打签</el-button>
+                            <el-button onclick="window.location='pages/jasper/seaCopyRow.html'" class="el-button--medium">海参补打签数据处理</el-button>
+                        </el-tab-pane>
+                        <el-tab-pane label="OtherBusiness">
+                            <el-button onclick="window.location='./pages/otherBusiness/pandian.html'" class="el-button--medium">盘点表</el-button>
+                            <el-button onclick="window.location='./pages/otherBusiness/sumMonth.html'" class="el-button--medium">月度组套数据汇总</el-button>
+                            <el-button onclick="window.location='./ZT.html'" class="el-button--medium">组套统计</el-button>
+                            <el-button onclick="window.location='http://localhost:8080/otherBusiness/appendExcel'" class="el-button--medium">统计测试</el-button>
+                            <el-button onclick="noOpen()" class="el-button--medium">BarTender代码执行打印</el-button>
+                            <el-button onclick="quit()" class="el-button--medium">退出</el-button>
+                        </el-tab-pane>
+                        <el-tab-pane label="SQL">
+                            <el-button onclick="window.location='./pages/sql/waveInfo.html'" class="el-button--medium">SQL-查询波次信息</el-button>
+                            <el-button onclick="window.location='pages/sql/pick.html'" class="el-button--medium">SQL-拣货签</el-button>
+                            <el-button onclick="window.location='pages/sql/weightAndBox.html'" class="el-button--medium">SQL-统计箱数和重量</el-button>
+                            <el-button onclick="window.location='pages/sql/floor1_3.html'" class="el-button--medium">SQL-出库区分1、3楼的托盘号</el-button>
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="js/vue.js"></script>
+<script src="plugins/elementui/index.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/utils.js"></script>
+
+<script>
+
+    function quit(){
+        alert("系统已退出")
+        window.location.href = 'https://chatgpt.com/';
+        axios.post("http://localhost:8080/quit").then(res => {
+
+        })
+
+    }
+    function noOpen(){
+        alert("未开放")
+    }
+
+    var vue = new Vue({
+
+        el: '#app',
+        data: {
+            isInsert: false, //是否新增操作
+            files: [],//新增文件
+            fileList: [],//文件列表
+            dialogForm: {
+                // name:"测试"
+            },
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+<!--<script>-->
+<!--    export default {-->
+<!--        data() {-->
+<!--            return {-->
+<!--                activeName: 'second'-->
+<!--            };-->
+<!--        },-->
+<!--        methods: {-->
+<!--            handleClick(tab, event) {-->
+<!--                console.log(tab, event);-->
+<!--            },-->
+
+<!--        }-->
+<!--    };-->
+<!--</script>-->

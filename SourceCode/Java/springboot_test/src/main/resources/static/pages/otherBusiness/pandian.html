@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- 页面meta -->
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>demo</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <!-- 引入样式 -->
+
+    <link rel="stylesheet" href="../../plugins/elementui/index.css">
+
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="app-container">
+        <el-menu class="el-menu-demo" mode="horizontal" onclick="window.location='../../home.html'">
+            <el-menu-item index="1" >首页</el-menu-item>
+        </el-menu>
+        <div class="content-header">
+            <el-tabs type="border-card">
+                <el-tab-pane label="OtherBusiness-盘点表">
+                </el-tab-pane>
+                <div>
+                    <!--                    <el-dialog>-->
+                    筛选条件（正则表达式）
+                    <el-input v-model="dialogForm.regex" placeholder="请输入内容" style="width: 200px;" class="filter-item">
+                    </el-input>
+
+                    <div style="margin-top:10px">
+                        组套需求Excel
+                        <el-upload style="width:400px" class="upload-demo"
+                                   ref="upload"
+                                   :limit="1"
+                                   :multiple="true"
+                                   accept=".xlsx"
+                                   action
+                                   :on-remove="handleUploadRemove"
+                                   :on-change="handleUploadChange"
+                                   :on-exceed="handleUploadExceed"
+                                   :file-list="fileList"
+                                   :http-request="uploadFile"
+                                   :auto-upload="false">
+
+                            <el-button slot="trigger" type="primary">选取Excel文件</el-button>
+                            <div slot="tip" class="el-upload__tip">上传文件不超过20MB</div>
+                        </el-upload>
+                    </div>
+
+                    <span slot="footer" class="dialog-footer">
+                        <el-button style="margin-top: 30px" class="el-button--warning" type="primary" @click="handleSubmit" v-loading.fullscreen.lock="fullscreenLoading">导出Excel</el-button>
+                    </span>
+                    <!--                    </el-dialog>-->
+                </div>
+            </el-tabs>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- 引入组件库 -->
+
+<script src="../../js/vue.js"></script>
+
+<script src="../../plugins/elementui/index.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+
+<script src="../../js/axios.min.js"></script>
+
+<script src="../../js/utils.js"></script>
+
+
+
+<script>
+
+    var vue = new Vue({
+
+        el: '#app',
+        data: {
+            isInsert:false, //是否新增操作
+            files: [],//新增文件
+            fileList: [],//文件列表
+            fullscreenLoading:false,
+            dialogForm:{
+                regex: "^28$|^29$|LZ.*"
+            },
+        },
+        methods: {
+            uploadFile(file) {
+                this.files.push(file.file);
+            },
+            handleUploadChange(file,fileList) {
+                // 当多余一个的时候替换文件
+                // if (fileList.length > 1) {
+                //   fileList.splice(0, 1);
+                // }
+                //获取上传文件大小
+                let imgSize = Number(file.size / 1024 / 1024);
+                if (imgSize > 20) {
+                    this.$message.warning("文件过大！")
+                }
+            },
+            handleUploadExceed(files, fileList) {
+                this.$message.warning(
+                    `当前限制选择 1 个文件，本次选择了 ${
+                        files.length
+                    } 个文件，共选择了 ${files.length + fileList.length} 个文件`
+                );
+            },
+            handleUploadRemove(file) {
+            },
+            handleSubmit() {
+                this.$refs.upload.submit();
+                let formDate = new FormData();
+                this.files.forEach(element => {
+                    formDate.append("files", element);
+                });
+                let config = {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                };
+                this.fullscreenLoading = true;
+                //携带表单参数
+                formDate.append("form", JSON.stringify(this.dialogForm));
+                axios.post("http://localhost:8080/otherBusiness/pandianMultipart", formDate, config).then(res => {
+                    resultManage(res)
+                    this.fullscreenLoading = false;
+                })
+            },
+        }
+    })
+
+</script>
+</html>

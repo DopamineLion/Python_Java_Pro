@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- 页面meta -->
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>demo</title>
+
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <!-- 引入样式 -->
+
+    <link rel="stylesheet" href="../../plugins/elementui/index.css">
+
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+</head>
+
+<body class="hold-transition">
+<div id="app">
+    <div class="app-container">
+        <el-menu class="el-menu-demo" mode="horizontal" onclick="window.location='../../home.html'">
+            <el-menu-item index="1" >首页</el-menu-item>
+        </el-menu>
+        <div class="content-header">
+            <el-tabs type="border-card">
+                <el-tab-pane label="OtherBusiness-月度组套数据汇总">
+                </el-tab-pane>
+                <div>
+                    <!--                    <el-dialog>-->
+                    文件夹
+                    <el-input v-model="dialogForm.inputPath" placeholder="请输入内容" style="width: 200px;" class="filter-item">
+                    </el-input>
+                    数据类型
+                    <el-select v-model="inputType" placeholder="请选择">
+<!--                        <el-option-->
+<!--                                v-for="item in options"-->
+<!--                                :key="item.value"-->
+<!--                                :label="item.label"-->
+<!--                                :value="item.value">-->
+<!--                        </el-option>-->
+                            <el-option
+                                    key="京东"
+                                    label="京东"
+                                    value="京东">
+                            </el-option>
+                            <el-option
+                                    key="海参"
+                                    label="海参"
+                                    value="海参">
+                            </el-option>
+                    </el-select>
+
+                    <span slot="footer" class="dialog-footer">
+                        <el-button style="margin-top: 30px" class="el-button--warning" type="primary" @click="handleSubmit" v-loading.fullscreen.lock="fullscreenLoading">导出Excel</el-button>
+                    </span>
+                    <!--                    </el-dialog>-->
+                </div>
+            </el-tabs>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- 引入组件库 -->
+
+<script src="../../js/vue.js"></script>
+
+<script src="../../plugins/elementui/index.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+
+<script src="../../js/axios.min.js"></script>
+
+<script src="../../js/utils.js"></script>
+
+
+
+<script>
+
+    var vue = new Vue({
+
+        el: '#app',
+        data: {
+            fullscreenLoading:false,
+            inputType: "",
+            inputPath : "京东",
+            dialogForm:{
+                inputType: "",
+            },
+        },
+        methods: {
+            handleSubmit() {
+                let formDate = new FormData();
+                this.fullscreenLoading = true;
+                formDate.append("inputPath", this.dialogForm.inputPath);
+                console.log(this.dialogForm.inputType)
+                formDate.append("inputType", this.inputType);
+                axios.post("http://localhost:8080/otherBusiness/sumMonth", formDate).then(res => {
+                    // resultManage(res)
+                    this.fullscreenLoading = false;
+                    alert(res.data)
+                })
+            },
+        }
+    })
+
+</script>
+</html>
+
+

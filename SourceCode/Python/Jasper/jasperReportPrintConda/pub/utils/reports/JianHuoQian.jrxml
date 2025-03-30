@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Document_WAVE_CS_WL_冷藏整箱签" pageWidth="226" pageHeight="170" whenNoDataType="NoPages" columnWidth="222" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2" isFloatColumnFooter="true" uuid="77fb3a95-1ff9-481d-9411-b70466270122">
+    <property name="ireport.zoom" value="3.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <property name="ireport.scriptlethandling" value="0"/>
+    <property name="ireport.encoding" value="UTF-8"/>
+    <import value="net.sf.jasperreports.engine.*"/>
+    <import value="java.util.*"/>
+    <import value="net.sf.jasperreports.engine.data.*"/>
+    <field name="COLUMNNAME1" class="java.lang.String"/>
+    <field name="COLUMNNAME2" class="java.lang.String"/>
+    <field name="COLUMNNAME3" class="java.lang.String"/>
+    <field name="COLUMNNAME4" class="java.lang.String"/>
+    <field name="COLUMNNAME5" class="java.lang.String"/>
+    <field name="COLUMNNAME6" class="java.lang.String"/>
+    <field name="COLUMNNAME7" class="java.lang.String"/>
+    <field name="COLUMNNAME8" class="java.lang.String"/>
+    <field name="COLUMNNAME9" class="java.lang.String"/>
+    <field name="COLUMNNAME10" class="java.lang.String"/>
+    <field name="COLUMNNAME11" class="java.lang.String"/>
+    <field name="COLUMNNAME12" class="java.lang.String"/>
+    <field name="COLUMNNAME13" class="java.lang.String"/>
+    <field name="COLUMNNAME14" class="java.lang.String"/>
+    <field name="COLUMNNAME15" class="java.lang.String"/>
+    <field name="COLUMNNAME16" class="java.lang.String"/>
+    <field name="COLUMNNAME17" class="java.lang.String"/>
+    <field name="COLUMNNAME18" class="java.lang.String"/>
+    <field name="COLUMNNAME19" class="java.lang.String"/>
+    <field name="COLUMNNAME20" class="java.lang.String"/>
+    <field name="COLUMNNAME21" class="java.lang.String"/>
+    <field name="COLUMNNAME22" class="java.lang.String"/>
+    <field name="COLUMNNAME23" class="java.lang.String"/>
+    <field name="COLUMNNAME24" class="java.lang.String"/>
+    <field name="COLUMNNAME25" class="java.lang.String"/>
+    <field name="COLUMNNAME26" class="java.lang.String"/>
+    <field name="COLUMNNAME27" class="java.lang.String"/>
+    <field name="COLUMNNAME28" class="java.lang.String"/>
+    <field name="COLUMNNAME29" class="java.lang.String"/>
+    <field name="COLUMNNAME30" class="java.lang.String"/>
+    <field name="COLUMNNAME31" class="java.lang.String"/>
+    <field name="COLUMNNAME32" class="java.lang.String"/>
+    <field name="COLUMNNAME33" class="java.lang.String"/>
+    <field name="COLUMNNAME34" class="java.lang.String"/>
+    <field name="COLUMNNAME35" class="java.lang.String"/>
+    <field name="COLUMNNAME36" class="java.lang.String"/>
+    <field name="COLUMNNAME37" class="java.lang.String"/>
+    <field name="COLUMNNAME38" class="java.lang.String"/>
+    <field name="COLUMNNAME39" class="java.lang.String"/>
+    <field name="COLUMNNAME40" class="java.lang.String"/>
+    <field name="COLUMNNAME41" class="java.lang.String"/>
+    <field name="COLUMNNAME42" class="java.lang.String"/>
+    <field name="COLUMNNAME43" class="java.lang.String"/>
+    <field name="COLUMNNAME44" class="java.lang.String"/>
+    <field name="COLUMNNAME45" class="java.lang.String"/>
+    <field name="COLUMNNAME46" class="java.lang.String"/>
+    <field name="COLUMNNAME47" class="java.lang.String"/>
+    <field name="COLUMNNAME48" class="java.lang.String"/>
+    <field name="COLUMNNAME49" class="java.lang.String"/>
+    <field name="COLUMNNAME50" class="java.lang.String"/>
+    <field name="COLUMNNAME51" class="java.lang.String"/>
+    <group name="COLUMNNAME46" isStartNewPage="true">
+        <groupExpression><![CDATA[$F{COLUMNNAME11}]]></groupExpression>
+        <groupHeader>
+            <band splitType="Stretch"/>
+        </groupHeader>
+        <groupFooter>
+            <band splitType="Stretch"/>
+        </groupFooter>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="166" splitType="Stretch">
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement key="textField-56" x="32" y="113" width="109" height="18" uuid="cff6cfad-beaf-4abc-b25c-6b44b4885fff"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME34}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-76" x="6" y="67" width="42" height="23" uuid="f3c442ac-58da-44db-8bf3-7c42a40fdb4e"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="simhei" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[标签号:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-64" x="87" y="137" width="40" height="10" uuid="5f54f7b7-147b-422d-9300-7d593ca708c1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8"/>
+                </textElement>
+                <text><![CDATA[共   页]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-44" x="99" y="137" width="15" height="10" uuid="86c64574-aaed-4327-9168-13d5bb863ce7"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-78" x="6" y="90" width="47" height="23" uuid="8f8af645-cb98-49fe-8584-2f22012fd25f"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="simhei" size="11" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[波次号:]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="72" y="137" width="15" height="10" uuid="0a7c0ab1-c9af-4076-a723-fba481cfbbfb"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement key="textField-62" x="54" y="90" width="87" height="23" uuid="eb4c50af-3ced-4416-b7ac-877635c0154a"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="11" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME45}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-70" x="0" y="113" width="32" height="18" uuid="4e397042-63c0-4ced-b580-692da9801a69"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[收货人:]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-54" x="48" y="67" width="93" height="23" uuid="f3e9d8aa-1427-4e34-b963-4acec202eb8f"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME11}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-63" x="63" y="137" width="33" height="10" uuid="4bf958a3-d0a3-43d8-a673-16302bc7ab3d"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8"/>
+                </textElement>
+                <text><![CDATA[第  页]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-84" x="139" y="6" width="28" height="24" uuid="419f32b0-1b12-448b-8eb7-a8cfce201c62">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[订单号：]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-85" x="139" y="30" width="28" height="21" uuid="584dd0b8-a3fe-4362-b874-3209a4a78aea">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[项目号:]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-70" x="167" y="30" width="55" height="21" uuid="9dffdaa3-acdb-4ebe-8570-8d9ae79d47b6">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME7}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-71" x="167" y="6" width="55" height="24" uuid="077e7d75-5456-4684-aa5a-fee1d1405b58"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8" isBold="false" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME1}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="8" y="131" width="49" height="23" uuid="009f9634-bc5f-41cd-81e3-5a3058fcf14e"/>
+                <box>
+                    <topPen lineWidth="0.75" lineStyle="Solid"/>
+                    <leftPen lineWidth="0.75" lineStyle="Solid"/>
+                    <bottomPen lineWidth="0.75" lineStyle="Solid"/>
+                    <rightPen lineWidth="0.75" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME33}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-86" x="139" y="51" width="28" height="24" uuid="20c2764c-2c6d-4320-8567-543b7ea7f1ff">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[品名：]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-87" x="139" y="74" width="28" height="21" uuid="b2f12e02-bf74-4195-bbe3-64e8965898d9">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[规格:]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-72" x="167" y="74" width="55" height="21" uuid="f68ecc81-bb3e-4f90-85ad-3e046bc0ee04"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8" isBold="false" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME22}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-73" x="167" y="50" width="55" height="25" uuid="dfa2a004-9040-4e0a-8465-4ab443a04a64"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8" isBold="false" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME36}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-88" x="139" y="95" width="28" height="24" uuid="84656d09-07f4-426a-90fb-cd9f54fd3ea5">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[库位：]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-89" x="138" y="119" width="28" height="21" uuid="143cd115-0acb-4ed4-96d5-1f129bf4e086">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[数量:]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-74" x="167" y="119" width="55" height="21" uuid="265658aa-6ceb-4852-9606-5cf525ab5ffb"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME15}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-75" x="167" y="95" width="55" height="24" uuid="57e96920-96e1-4ebb-855a-7a87760c476a"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME10}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-90" x="138" y="139" width="28" height="21" uuid="896009e6-7178-4d4a-8d76-ca64cab1dd88">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="7" isBold="false" pdfFontName="Helvetica"/>
+                </textElement>
+                <text><![CDATA[批次:]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-76" x="167" y="139" width="55" height="21" uuid="a5785011-1762-49e4-909b-6acb32556918"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="simhei" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{COLUMNNAME20}]]></textFieldExpression>
+            </textField>
+            <componentElement>
+                <reportElement x="-2" y="6" width="142" height="61" uuid="3daa614f-12d3-4687-bd99-f4a5a6191018">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.barWidth" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.barHeight" value="px"/>
+                </reportElement>
+                <jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false" barHeight="90">
+                    <jr:codeExpression><![CDATA[$F{COLUMNNAME11}]]></jr:codeExpression>
+                </jr:barbecue>
+            </componentElement>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

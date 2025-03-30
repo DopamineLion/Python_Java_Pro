@@ -1,0 +1,55 @@
+jasper:
+  defaultInputPath: C:\Users\Administrator\Documents\Data\京东\11.13\补打签.xlsx
+  isQrCode: false
+
+bartender:
+  jacob: classpath:bartender/jacob-1.21-x64.dll
+  printLength: null
+  templatePath: C:/Users/Administrator/Documents/BarTender/BarTender Documents/小签30 X 20 模板集合(数据源Excel).btw
+  printerName: ZDesigner ZT210-200dpi ZPL
+#  printerName: QR-668 LABEL
+#  printerName: PDF
+#  printerName: QR-668
+
+
+
+business:
+  excelPath: C:\Users\Administrator\Documents\Data\京东\11.11\11.10京东自动补货单 的副本.xlsx
+  excelSheet: null
+  rightExcelPath: C:\Users\Administrator\Documents\Data\京东\11.11\8仓门店供货清单.xlsx
+  rightExcelSheet: null
+  regex: 小红|大红|双支|保质期|专用礼盒|自带礼袋|通用礼袋|专用礼袋|\*[23456](?!\d)
+  miniRegex: ^((?!小红|大红|双支|保质期|专用礼盒|自带礼袋|通用礼袋|专用礼袋|\*[2346]).)*(贴|威总)((?!小红|大红|双支|保质期|专用礼盒|自带礼袋|通用礼袋|专用礼袋|\*[2346]).)*$
+#  filterColumn: 库房出库备注
+  filterColumn: 贴码
+  lengthColumn: 改数后数量
+
+seaBusiness:
+  seaExcelPath: C:\Users\Administrator\Documents\Data\海参\11.12\京东海参自营下单11.12 的副本.xlsx
+  seaRightExcelPath: C:\Users\Administrator\Documents\Data\海参\11.12\海参供货清单.xlsx
+
+otherBusiness:
+  excelPath: C:\Users\Administrator\Documents\Data\others\盘点\盘点表11.11.xlsx
+  excelSheet: null
+
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: springboot_test
+  web:
+    resources:
+      static-locations: classpath:/static/
+  servlet:
+    multipart:
+      max-file-size: 100MB # 设置单个文件的最大大小
+      max-request-size: 100MB # 设置请求的最大大小，包括多个文件
+
+#  # 最大上传单个文件大小：默认1M
+#  spring.servlet.multipart.max-file-size=10MB
+#  # 最大总上传的文件大小 ：默认10M
+#  spring.servlet.multipart.max-request-size=100MB
+
+
